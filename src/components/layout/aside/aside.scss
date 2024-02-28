@@ -1,0 +1,6 @@
+.aside {
+    grid-area: aside;
+    overflow: auto;
+    padding: var(--global-padding);
+    word-wrap: break-word;
+}
