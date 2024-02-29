@@ -2,5 +2,37 @@
     grid-area: aside;
     overflow: auto;
     padding: var(--global-padding);
-    word-wrap: break-word;
+    &__top {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        padding-bottom: var(--global-padding);
+        &__clickme {
+            cursor: pointer;
+            color: var(--link-color);
+            &:hover {
+                color: var(--link-color-h);
+            }
+        }
+    }
+    &__list {
+        &__item {
+            height: max-content;
+            border-top: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: space-between;
+            &:last-of-type {
+                border-bottom: 1px solid var(--border-color);
+            }
+            &__info {
+                width: 95%;
+            }
+            &__btn {
+                display: flex;
+                flex-direction: column;
+            }
+        }
+    }
 }

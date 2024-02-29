@@ -87,22 +87,26 @@ const Aside = () => {
 
     return (
         <aside className="aside">
-            <h2>Notas: {notas.length}</h2>
-            <span className="clickme" onClick={handleOnClickAddNote}>
+            <div className="aside__top">
+                <span className="aside__top__clickme" onClick={handleOnClickAddNote}>
                     Añadir
-            </span>
-            <span className="clickme" onClick={handleOnClickMostrarFavoritos}>
-                {estado} solo favoritos
-            </span>
-            <ul>
+                </span>
+                <br />
+                <span className="aside__top__clickme" onClick={handleOnClickMostrarFavoritos}>
+                    {estado} solo favoritos
+                </span>
+            </div>
+            <ul className="aside__list">
                 {notas.map((nota, index) => (
-                    <li key={index} onClick={() => handleOnClickShowNote(index)}>
-                        <div>
+                    <li className="aside__list__item" key={index} onClick={() => handleOnClickShowNote(index)}>
+                        <div className="aside__list__item__info">
                             {nota.fav ? (<h4>⭐{nota.titulo}</h4>) : (<h4>{nota.titulo}</h4>)}
                             <p>{nota.contenido}</p>
-                            <button onClick={(e) => {e.stopPropagation(); handleOnClickRemoveNote(index);}}><FontAwesomeIcon icon={faTrash} /></button>
-                            <button onClick={(e) => {e.stopPropagation(); handleOnClickEditNote(index);}}><FontAwesomeIcon icon={faPen} /></button>
-                            <button onClick={(e) => {e.stopPropagation(); handleOnClickFav(index);}}><FontAwesomeIcon icon={faStar} /></button>
+                        </div>
+                        <div className="aside__list__item__btn">
+                            <span className="btn btn-delete" onClick={(e) => {e.stopPropagation(); handleOnClickRemoveNote(index);}}><FontAwesomeIcon icon={faTrash} /></span>
+                            <span className="btn btn-edit" onClick={(e) => {e.stopPropagation(); handleOnClickEditNote(index);}}><FontAwesomeIcon icon={faPen} /></span>
+                            <span className="btn btn-fav" onClick={(e) => {e.stopPropagation(); handleOnClickFav(index);}}><FontAwesomeIcon icon={faStar} /></span>
                         </div>
                     </li>
 
