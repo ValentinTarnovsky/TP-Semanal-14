@@ -17,6 +17,7 @@
     }
     &__list {
         &__item {
+            cursor: pointer;
             height: 5rem;
             border-top: 1px solid var(--border-color);
             display: flex;

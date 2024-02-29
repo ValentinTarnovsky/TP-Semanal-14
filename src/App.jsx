@@ -6,14 +6,19 @@ import Main from "./components/layout/main/Main";
 import Footer from "./components/layout/footer/Footer";
 import Aside from "./components/layout/aside/Aside";
 import NotesContext from "./components/contexts/DataContext";
-import { useState, useRef } from "react";
+import { useState, useEffect } from "react";
 
 const App = () => {
-
     const [ notas, setNotas ] = useState([
         {
             titulo: "Hola, soy una nota!",
-            contenido: "Esta es una nota, puedes crear otras, ademas de editarlas, ponerlas como favoritas o eliminarlas :D",
+            contenido: `Hey, Esta es una nota!
+            😁 Puedes crear todas las notas que quieras!
+            ✍🏾 Ademas de editarlas!
+            ⭐ Ponerlas como favoritas!
+            ❌ Tambien eliminarlas!
+
+            App de notas por Valentin Tarnovsky!`,
             id: 0,
             fav: true,
         },
@@ -22,6 +27,17 @@ const App = () => {
     const [ showNote, setShowNote ] = useState({});
     const [ editando, setEditando ] = useState(false);
     const [ mostrandoFav, setMostrandoFav ] = useState(false);
+
+    useEffect(() => {
+        const notasGuardadas = localStorage.getItem("notas");
+        if (notasGuardadas) {
+            setNotas(JSON.parse(notasGuardadas));
+        }
+    }, []);
+
+    useEffect(() => {
+        localStorage.setItem("notas", JSON.stringify(notas));
+    }, [notas]);
 
     return (
         <>
