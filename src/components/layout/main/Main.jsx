@@ -1,4 +1,4 @@
-import { useContext, useState, useEffect } from "react";
+import { useContext, useState, useEffect, useRef } from "react";
 import NotesContext from "../../contexts/DataContext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheckDouble } from "@fortawesome/free-solid-svg-icons";
@@ -9,6 +9,7 @@ const Main = () => {
     const { notas, setNotas, iden, setIden, showNote, setShowNote, editando, setEditando } = useContext(NotesContext);
     const [ titulo, setTitulo ] = useState("");
     const [ contenido, setcontenido ] = useState("");
+    const val = useRef();
 
     useEffect(() => {
         setTitulo(showNote.titulo);
@@ -16,30 +17,30 @@ const Main = () => {
     }, [showNote]);
 
     const handleOnChangeTitle =(e) => {
+        val.current = e.target.value;
         setShowNote({
-            titulo: e.target.value,
+            titulo: val.current,
             contenido: showNote.contenido,
             id: showNote.id,
             fav: showNote.fav,
         });
         const index = notas.findIndex((nota) => nota.id === showNote.id);
         const cloneNotas = [...notas];
-        cloneNotas[index].titulo = showNote.titulo;
-        cloneNotas[index].contenido = showNote.contenido;
+        cloneNotas[index].titulo = val.current;
         setNotas(cloneNotas);
     };
 
     const handleOnChangeNote =(e) => {
+        val.current = e.target.value;
         setShowNote({
             titulo: showNote.titulo,
-            contenido: e.target.value,
+            contenido: val.current,
             id: showNote.id,
             fav: showNote.fav,
         });
         const index = notas.findIndex((nota) => nota.id === showNote.id);
         const cloneNotas = [...notas];
-        cloneNotas[index].titulo = showNote.titulo;
-        cloneNotas[index].contenido = showNote.contenido;
+        cloneNotas[index].contenido = val.current;
         setNotas(cloneNotas);
     };
 
@@ -57,7 +58,7 @@ const Main = () => {
                             placeholder="Escriba su titulo aqui..."
                             className="main__form__input"
                             type="text"
-                            value={showNote.titulo} // Asegúrate de que el valor esté controlado
+                            value={showNote.titulo}
                             onChange={handleOnChangeTitle}
                         />
                         <textarea
@@ -66,7 +67,7 @@ const Main = () => {
                             value={showNote.contenido}
                             onChange={handleOnChangeNote}
                         ></textarea>
-                        <button type="submit"><FontAwesomeIcon icon={faCheckDouble} /></button>
+                        <button className="main__form__btn" type="submit"><FontAwesomeIcon icon={faCheckDouble} /></button>
                     </form>
                 </>
             ) : (

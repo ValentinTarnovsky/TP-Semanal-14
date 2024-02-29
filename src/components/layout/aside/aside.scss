@@ -17,7 +17,7 @@
     }
     &__list {
         &__item {
-            height: max-content;
+            height: 5rem;
             border-top: 1px solid var(--border-color);
             display: flex;
             flex-direction: row;
@@ -27,11 +27,32 @@
                 border-bottom: 1px solid var(--border-color);
             }
             &__info {
-                width: 95%;
-            }
-            &__btn {
+                width: 85%;
                 display: flex;
                 flex-direction: column;
+                justify-content: space-evenly;
+                p,
+                h4 {
+                    overflow: hidden;
+                    white-space: nowrap;
+                    text-overflow: ellipsis;
+                }
+                h4 {
+                    font-size: 1rem;
+                    span {
+                        color: rgb(255, 251, 0);
+                    }
+                    &:empty::after {
+                        content: "Nota vacia...";
+                        color: var(--border-color);
+                    }
+                }
+            }
+            &__btn {
+                font-size: 1rem;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-evenly;
             }
         }
     }
